@@ -20,8 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('products', ProductController::class)->only(['store', 'update', 'destroy'])->middleware(ProductAccessMiddleware::class);
-Route::apiResource('products', ProductController::class)->only(['index', 'show'])->withoutMiddleware(ProductAccessMiddleware::class);
+
+Route::apiResource('products', ProductController::class);
 Route::middleware([ProductAccessMiddleware::class])->group(function () {
 
     Route::prefix('products/upload')->group(function () {

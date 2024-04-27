@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Middleware\ProductAccessMiddleware;
 
 class ProductController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware(ProductAccessMiddleware::class)->except('index', 'show');
+    }
     /**
      * ○ Retrieving a list of all products.
      *       i. Response message: Display all products.
