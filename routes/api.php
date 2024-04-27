@@ -22,12 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::apiResource('products', ProductController::class);
-Route::middleware([ProductAccessMiddleware::class])->group(function () {
-
-    Route::prefix('products/upload')->group(function () {
-        Route::controller(ProductController::class)->group(function () {
-            Route::post('local', 'uploadImageLocal')->name('upload.local');
-            Route::post('public', 'uploadImagePublic')->name('upload.public');
-        });
+Route::prefix('products/upload')->group(function () {
+    Route::controller(ProductController::class)->group(function () {
+        Route::post('local', 'uploadImageLocal')->name('upload.local');
+        Route::post('public', 'uploadImagePublic')->name('upload.public');
     });
 });
